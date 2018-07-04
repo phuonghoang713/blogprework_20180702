@@ -2,10 +2,13 @@
 <h3><%= @markdown.render(@post.body).html_safe %></h3>
 <p><%= time_ago_in_words(@post.created_at)%></p>
 <br>
+<h6>Comment:</h6>
 <% @post.comments.each do |comment| %>
-<%= comment.body %>
+<%= link_to comment.body, edit_post_comment_path(@post,comment) %>
+<%= link_to "Delete Comment", post_comment_path(@post,comment), method: :delete %>
 <br>
 <% end%>
+
 
 <%= form_for [@post, Comment.new] do |f| %>
     <%= f.text_field :body, placeholder: "Comment", class: "form-control", require: true  %>
