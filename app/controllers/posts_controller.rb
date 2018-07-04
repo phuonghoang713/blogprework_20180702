@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def show
-  
+    @post = Post.find(params[:id])
   end
 
   def create
@@ -20,6 +20,30 @@ class PostsController < ApplicationController
       redirect_to posts_path
     end
 
+  end
+  
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update 
+    @post = Post.find(params[:id])
+    if @post.update(params_post)
+      redirect_to @post
+    else
+      render 'Edit'
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      flash[:success] = 'Post was successfully deleted.'
+      redirect_to posts_url
+    else
+      flash[:error] = 'Something went wrong'
+      redirect_to posts_url
+    end
   end
   
   private 
