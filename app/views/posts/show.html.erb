@@ -1,4 +1,6 @@
 <h1><%= @post.title%></h1>
-<h3> <%= @post.body %></h3>
+<h3><%= @markdown.render(@post.body).html_safe %></h3>
+<p><%= time_ago_in_words(@post.created_at)%></p>
+
 <%= link_to "Edit", edit_post_url(@post) %>
-<%= link_to "Delete", post_url(@post), method: 'delete' %>
+<%= link_to "Delete", post_url(@post), method: 'delete', data: {confirm: 'Are you want to delete'}%>

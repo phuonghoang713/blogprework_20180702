@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   end
 
   def new
@@ -9,6 +10,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   end
 
   def create

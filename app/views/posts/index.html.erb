@@ -2,6 +2,6 @@
 
 <% @posts.each do |post| %>
   <h3><%= link_to post.title, post_path(post) %> 
-  <p><%= post.body %></p>
+  <p><%= @markdown.render(post.body).html_safe %></p>
   <hr>
 <% end %>
