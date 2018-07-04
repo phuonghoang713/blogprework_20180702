@@ -1,6 +1,17 @@
 <h1><%= @post.title%></h1>
 <h3><%= @markdown.render(@post.body).html_safe %></h3>
 <p><%= time_ago_in_words(@post.created_at)%></p>
+<br>
+<% @post.comments.each do |comment| %>
+<%= comment.body %>
+<br>
+<% end%>
+
+<%= form_for [@post, Comment.new] do |f| %>
+    <%= f.text_field :body, placeholder: "Comment", class: "form-control", require: true  %>
+    <%= f.submit %>
+<% end %>
+
 
 <%= link_to "Edit", edit_post_url(@post) %>
 <%= link_to "Delete", post_url(@post), method: 'delete', data: {confirm:
