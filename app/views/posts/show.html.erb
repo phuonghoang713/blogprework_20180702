@@ -3,4 +3,5 @@
 <p><%= time_ago_in_words(@post.created_at)%></p>
 
 <%= link_to "Edit", edit_post_url(@post) %>
-<%= link_to "Delete", post_url(@post), method: 'delete', data: {confirm: 'Are you want to delete'}%>
+<%= link_to "Delete", post_url(@post), method: 'delete', data: {confirm:
+              "Are you want to delete #{@post.title} ?"}%>
