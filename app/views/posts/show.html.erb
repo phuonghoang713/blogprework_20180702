@@ -4,7 +4,7 @@
 <hr>
 <h6>Comment:</h6>
 <% @post.comments.each do |comment| %>
-    <% if current_user == nil || comment.user_id != current_user.id%>
+    <% if !user_signed_in? || comment.user_id != current_user.id%>
       <%= comment.body %>
     <% elsif comment.user_id == current_user.id %>
       <%= link_to comment.body, edit_post_comment_path(@post,comment) %>
@@ -21,7 +21,7 @@
     <% end %>
 <% end %>
 
-<%if current_user != nil && @post.user_id == current_user.id %>
+<%if user_signed_in? && @post.user_id == current_user.id %>
 <%= link_to "Edit", edit_post_url(@post) %>
 <%= link_to "Delete", post_url(@post), method: 'delete', data: {confirm:
               "Are you want to delete #{@post.title} ?"}%>
